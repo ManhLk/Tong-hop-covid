@@ -32,11 +32,11 @@ class Crawl:
             result['Time header'] = [t]
             contents = []
             for content in time.find_elements_by_tag_name("p"):
-                c = content.text 
-                if str(c).startswith("-"):
+                c = str(content.text).strip()
+                if c.startswith("-"):
                     if '\n \n' in c:
                         for cc in c.split('\n'):
-                            if str(cc).startswith("-"):
+                            if str(cc).strip().startswith("-"):
                                 contents.append(cc)
                     else:
                         contents.append(c)

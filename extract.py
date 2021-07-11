@@ -28,7 +28,7 @@ class Extract:
         if 'được cách ly ngay sau khi nhập cảnh' in desc:
             return 'Nhập cảnh'
         start_idx = desc.find('ghi nhận tại') + len('ghi nhận tại')
-        end_idx = desc.find(':', start_idx)
+        end_idx = desc.find(':', start_idx) if desc.find(':', start_idx) != -1 else desc.find(',', start_idx) 
         return ' '.join(desc[start_idx:end_idx].split()[1:]) 
 
     def extract_note(self, desc):
@@ -36,7 +36,8 @@ class Extract:
             start_idx = desc.find('được cách ly ngay sau khi nhập cảnh')
         else:
             start_idx = desc.find('ghi nhận tại')
-            start_idx = desc.find(':', start_idx) + 1
+            start_idx = desc.find(':', start_idx) if desc.find(':', start_idx) != -1 else desc.find(',', start_idx)
+            start_idx += 1
         return desc[start_idx:]
 
     def get_date(slef, time_line):
